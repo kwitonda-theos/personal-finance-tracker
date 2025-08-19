@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="Dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="balance-card">
+                <span>Current balance</span>
+                <h2 class="balance"></h2>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li class="home-tab"><a href="pft.html">Home</a></li>
+                    <li class="Dashboard-tab">Dashboard</li>
+                    <li class="income-tab">Income</li>
+                    <li class="expenses-tab">Expenses</li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section class="form-section">
+                <h3>Log income</h3>
+                <form class="form">
+                    <div class="form-row">
+                        <input type="number" placeholder="Amount" class="income-amount-input" required>
+                        <input type="date" class="income-date-input" required>
+                    </div>
+                    <input type="text" placeholder="Description" class="income-description-input" required>
+                    <button type="submit" class="submit-btn income-submit">Submit</button>
+                </form>
+            </section>
+            <section class="form-section">
+                <h3>Log expenses</h3>
+                <form class="form">
+                    <div class="form-row">
+                        <input type="number" placeholder="Amount" class="expenses-amount-input" required>
+                        <input type="date" class="expenses-date-input" required>
+                    </div>
+                    <input type="text" placeholder="Description" class="expenses-description-input" required>
+                    <button type="submit" class="submit-btn expenses-submit">Submit</button>
+                </form>
+            </section>
+            <section class="income-section">
+                <h3>Income</h3>
+                <table class="income-table">
+                    <thead>
+                        <tr>
+                            <th>date</th>
+                            <th>description</th>
+                            <th>amount</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody class="income-rows">
+                        <!-- Income rows will go here -->
+                    </tbody>
+                </table>
+            </section>
+            <section class="expenses-section">
+                <h3>Expenses</h3>
+                <table class="expenses-table">
+                    <thead>
+                        <tr>
+                            <th>date</th>
+                            <th>description</th>
+                            <th>amount</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody class="expenses-rows">
+                        <!-- Income rows will go here -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <script src="Dashboard.js"></script>
+</body>
+</html>

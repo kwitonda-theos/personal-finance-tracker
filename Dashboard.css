@@ -1,0 +1,237 @@
+body {
+    font-family: 'Jost', sans-serif;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+}
+a{
+    transition: color 0.2s;
+    text-decoration: none;
+    color: #ffffff;
+}
+a:hover{
+    color: #bfb5ff;
+
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    background: #3200ff;
+    color: #fff;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.balance-card {
+    background: #fff;
+    color: #222;
+    border-radius: 8px;
+    padding: 20px 30px;
+    margin-bottom: 40px;
+    box-shadow: 0px 11px 26px -8px rgba(0,0,0,0.52);
+-webkit-box-shadow: 0px 11px 26px -8px rgba(0,0,0,0.52);
+-moz-box-shadow: 0px 11px 26px -8px rgba(0,0,0,0.52);
+    text-align: left;
+    
+}
+
+.balance-card span {
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.balance-card h2 {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+
+.nav li {
+    font-size: 1.6rem;
+    margin: 30px 0;
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.2s;
+    
+}
+
+.nav li:hover {
+    color: #bfb5ff;
+    
+}
+
+.main-content {
+    flex: 1;
+    background: #fff;
+    padding: 0px 40px 0px 200px;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 0 0 0 2px #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.form-section {
+    margin-bottom: 40px;
+    max-width: 600px;
+}
+
+.form-section h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    
+}
+
+.form input[type="number"],
+.form input[type="date"],
+.form input[type="text"] {
+    background: #f3f3f3;
+    border: none;
+    border-radius: 7px;
+    padding: 14px 16px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    
+}
+
+.form-row input {
+    width: 50%;
+}
+
+.submit-btn {
+    background: #3200ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 0;
+    font-size: 1.2rem;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+    transition: color 0.2s;
+}
+.submit-btn:hover {
+    background: #4d22e6;
+    color: #e6e0ff;
+}
+/* Add to Dashboard.css */
+
+.income-section {
+    margin-top: 30px;
+    max-width: 700px;
+    display: none;
+}
+
+.income-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-family: 'Jost', sans-serif;
+}
+.income-table th,
+.income-table td {
+    border: 1px solid #222;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.income-table th {
+    font-weight: 500;
+    background: #fff;
+}
+
+.income-table td {
+    background: #fff;
+}
+.income-table th:last-child,
+.income-table td:last-child {
+    width: 80px;
+}
+.income-row{
+    border: 1px solid #222;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* Expenses Section */
+.expenses-section {
+    margin-top: 30px;
+    max-width: 700px;
+    display: none;
+}
+
+.expenses-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-family: 'Jost', sans-serif;
+}
+.expenses-table th,
+.expenses-table td {
+    border: 1px solid #222;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.expenses-table th {
+    font-weight: 500;
+    background: #fff;
+}
+
+.expenses-table td {
+    background: #fff;
+}
+.expenses-table th:last-child,
+.expenses-table td:last-child {
+    width: 80px;
+}
+.expenses-row{
+    border: 1px solid #222;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.delete-icon {
+    display: none;
+}
