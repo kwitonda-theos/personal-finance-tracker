@@ -1,0 +1,128 @@
+*{
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
+    font-family: "jost",sans-serif;
+}
+.container{
+    display: flex;
+}
+/* first part*/
+.first-part{
+    margin-left:100px;
+    margin-top: 40px;
+    margin-right: 75px;
+}
+.first-nav{
+    display: flex;
+    gap: 10px;
+    
+}
+.first-nav h1{
+    padding-top: 5px;
+    font-size: 37px;
+
+}
+.first-nav img{
+    width:35px;
+    padding-top: 15px;
+    height: 35px;
+}
+.first-content {
+    margin-top: 80px;
+    
+}
+.first-content h1{
+    line-height: 1.2em;
+    margin-bottom: 30px;
+}
+.first-content p{
+    margin-top: 30px;
+    font-size: 17px;
+}
+.first-content hr{
+    border: 2px solid black;
+    margin-right: 200px;
+}
+
+
+/*second part*/
+.second-part{
+    display: grid;
+    
+    grid-template-columns: 1fr;
+    background: #3700ff;
+    
+    padding: 0px 92px 57px 0px;
+    
+}
+.second-part ul{
+    list-style: none;
+    display: flex;
+    gap: 70px;
+    
+    
+}
+.second-part a{
+    text-decoration: none;
+    color: white;
+    transition: color 0.2s;
+}
+.second-part a:hover{
+    color: rgb(201, 221, 238);
+}
+.second-nav{
+    font-size: 32px;
+    margin-top: 45px;
+    margin-left: 210px;
+    margin-right: 95px;
+
+    
+}
+
+/* support page */
+.support-form{
+    display:grid;
+    grid-template-columns: 1fr ;
+    margin-top: 20px;
+    background: white;
+    padding: 20px 40px 30px 40px;
+    border-radius: 10px;
+    border: none;
+    width: 60%;
+    margin-left: 170px;
+    margin-right: auto;
+    
+    
+    
+
+    
+
+}
+.support-form input[type="text"],
+.support-form input[type="email"],
+.support-form textarea {
+    
+    padding: 10px;
+    margin: 5px 0px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.support-form button {
+    background-color: #3700ff;
+    color: white;
+    padding: 10px 20px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: color 0.2s, background-color 0.2s;
+}
+.support-form button:hover {
+    background-color: #5c5cff;
+    color: #fff;
+}
