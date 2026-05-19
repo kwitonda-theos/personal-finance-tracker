@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>support</title>
     {% load static %}
-    <link rel="shortcut icon" href="{% static 'images/line-chart.png' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'line-chart.png' %}" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
 
 
     {% load static %}
-    <link rel="stylesheet" href="support.css">
+    <link rel="stylesheet" href="{% static 'support.css' %}">
 </head>
 
 <body>
@@ -24,7 +24,7 @@
 
             <div class="first-nav">
                 {% load static %}
-                <img src="{% static 'images/line-chart.png' %}" alt="logo" srcset="">
+                <img src="{% static 'line-chart.png' %}" alt="logo" srcset="">
                 <h1>Finance Tracker</h1>
             </div>
 
@@ -71,7 +71,7 @@
 
 
     {% load static %}
-    <script src="pft.js"></script>
+    <script src="{% static 'pft.js' %}"></script>
 </body>
 
 </html>

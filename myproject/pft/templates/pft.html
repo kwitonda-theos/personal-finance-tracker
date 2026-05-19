@@ -13,7 +13,7 @@
 
 
     {% load static %}
-    <link rel="stylesheet" href="pft.css">
+    <link rel="stylesheet" href="{% static 'pft.css' %}">
 </head>
 
 <body>
@@ -41,9 +41,9 @@
 
             <div class="second-nav">
                 <ul>
-                    <li><a href="pft.html">Home</a></li>
-                    <li><a href="Dashboard.html">Dashboard</a></li>
-                    <li><a href="support.html">Support</a></li>
+                    <li><a href="{% url 'pft' %}">Home</a></li>
+                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'support' %}">Support</a></li>
                 </ul>
             </div>
             {% load static %}
@@ -54,7 +54,7 @@
 
 
     {% load static %}
-    <script src="pft.js"></script>
+    <script src="{% static 'pft.js' %}"></script>
 </body>
 
 </html>
