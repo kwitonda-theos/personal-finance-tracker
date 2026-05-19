@@ -12,6 +12,7 @@ myvenv/
 *.sqlite3
 myproject/.env
 myproject/.env.*
+myproject/staticfiles/
 
 # VS Code
 .vscode/

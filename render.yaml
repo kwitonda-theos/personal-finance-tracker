@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: personal-finance-tracker
+    env: python
+    rootDir: myproject
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: gunicorn myproject.wsgi:application
+    autoDeploy: true
