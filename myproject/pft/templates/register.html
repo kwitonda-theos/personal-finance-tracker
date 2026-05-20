@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Personal Finance Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'pft.css' %}">
+</head>
+<body>
+    <div class="auth-container">
+        <form class="auth-form" method="POST" action="">
+            {% csrf_token %}
+            <h2>Sign Up</h2>
+            
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required placeholder="Choose a username">
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email">
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required placeholder="Create a password">
+            
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm your password">
+            
+            <button type="submit">Register</button>
+            
+            <p>Already have an account? <a href="{% url 'login' %}">Sign In</a></p>
+            <p style="margin-top: 8px;"><a href="{% url 'pft' %}">&larr; Back to Home</a></p>
+        </form>
+    </div>
+</body>
+</html>

@@ -7,3 +7,9 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 def support(request):
     return render(request, 'support.html')
+
+def login(request):
+    return render(request, 'login.html')
+
+def register(request):
+    return render(request, 'register.html')
