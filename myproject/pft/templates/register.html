@@ -16,14 +16,14 @@
             {% csrf_token %}
             <h2>Sign Up</h2>
             
-            <div style="display: flex; gap: 15px;">
-                <div style="flex: 1;">
+            <div class="name-row">
+                <div class="name-field">
                     <label for="first_name">First Name</label>
-                    <input type="text" id="first_name" name="first_name" required placeholder="First name" style="width: 100%; box-sizing: border-box;">
+                    <input type="text" id="first_name" name="first_name" required placeholder="First name">
                 </div>
-                <div style="flex: 1;">
+                <div class="name-field">
                     <label for="last_name">Last Name</label>
-                    <input type="text" id="last_name" name="last_name" required placeholder="Last name" style="width: 100%; box-sizing: border-box;">
+                    <input type="text" id="last_name" name="last_name" required placeholder="Last name">
                 </div>
             </div>
             

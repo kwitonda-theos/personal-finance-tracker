@@ -269,3 +269,110 @@
 .auth-form p a:hover {
     color: #2600b3;
 }
+
+/* Responsive and layout additions */
+.name-row {
+    display: flex;
+    gap: 15px;
+}
+.name-field {
+    flex: 1;
+}
+.name-field input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .first-part {
+        margin: 30px 20px;
+        text-align: center;
+        margin-right: 20px; /* Reset original margin-right: 75px */
+        margin-left: 20px;  /* Reset original margin-left: 100px */
+    }
+    
+    .first-nav {
+        justify-content: center;
+    }
+
+    .first-content {
+        margin-top: 40px;
+    }
+    
+    .first-content hr {
+        margin-right: auto;
+        margin-left: auto;
+        border-width: 2px;
+    }
+    
+    .auth-buttons {
+        justify-content: center;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 30px;
+    }
+    
+    .btn-primary, .btn-secondary {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        padding: 14px 20px;
+    }
+
+    .second-part {
+        padding: 40px 20px;
+    }
+
+    .second-nav {
+        margin-top: 20px;
+        margin-left: 0;
+        text-align: center;
+        font-size: 24px;
+    }
+    
+    .second-part ul {
+        justify-content: center;
+        gap: 30px;
+        padding: 0;
+    }
+
+    .home-image {
+        width: 100%;
+        height: auto;
+        margin-left: 0;
+        margin-top: 20px;
+        max-width: 500px;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    /* Auth Page responsiveness */
+    .auth-container {
+        padding: 20px;
+        min-height: 100vh;
+        box-sizing: border-box;
+    }
+
+    .auth-form {
+        width: 100%;
+        max-width: 400px;
+        padding: 40px 20px;
+        box-sizing: border-box;
+    }
+    
+    .auth-form h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .name-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
