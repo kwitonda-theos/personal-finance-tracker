@@ -217,7 +217,8 @@
 
 .auth-form input[type="text"],
 .auth-form input[type="password"],
-.auth-form input[type="email"] {
+.auth-form input[type="email"],
+.auth-form input[type="tel"] {
     padding: 14px;
     margin-top: 8px;
     border: 1px solid #e0e0e0;
@@ -229,7 +230,8 @@
 
 .auth-form input[type="text"]:focus,
 .auth-form input[type="password"]:focus,
-.auth-form input[type="email"]:focus {
+.auth-form input[type="email"]:focus,
+.auth-form input[type="tel"]:focus {
     border-color: #3700ff;
 }
 

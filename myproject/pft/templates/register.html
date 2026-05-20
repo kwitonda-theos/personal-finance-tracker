@@ -16,11 +16,22 @@
             {% csrf_token %}
             <h2>Sign Up</h2>
             
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required placeholder="Choose a username">
+            <div style="display: flex; gap: 15px;">
+                <div style="flex: 1;">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" required placeholder="First name" style="width: 100%; box-sizing: border-box;">
+                </div>
+                <div style="flex: 1;">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" required placeholder="Last name" style="width: 100%; box-sizing: border-box;">
+                </div>
+            </div>
             
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required placeholder="Enter your email">
+            
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
             
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required placeholder="Create a password">
