@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import check_password
 from django.db import IntegrityError, transaction
 from django.shortcuts import redirect, render
 
@@ -13,6 +14,30 @@ def support(request):
     return render(request, 'support.html')
 
 def login(request):
+    if request.method == 'POST':
+        email = request.POST.get('email', '').strip().lower()
+        password = request.POST.get('password', '')
+
+        if not email or not password:
+            messages.error(request, 'Email and password are required.')
+            return render(request, 'login.html', {'form_data': {'email': email}}, status=400)
+
+        try:
+            user = FinanceUser.objects.get(email=email)
+        except FinanceUser.DoesNotExist:
+            messages.error(request, 'Invalid email or password.')
+            return render(request, 'login.html', {'form_data': {'email': email}}, status=400)
+
+        if not check_password(password, user.password):
+            messages.error(request, 'Invalid email or password.')
+            return render(request, 'login.html', {'form_data': {'email': email}}, status=400)
+
+        request.session['user_id'] = user.id
+        request.session['user_email'] = user.email
+        request.session['user_name'] = f'{user.first_name} {user.last_name}'.strip()
+        messages.success(request, 'Logged in successfully.')
+        return redirect('dashboard')
+
     return render(request, 'login.html')
 
 def register(request):
