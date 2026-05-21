@@ -19,9 +19,15 @@
 <body>
     <div class="container">
         <aside class="sidebar">
+            <div class="user-card">
+                <span>Signed in as</span>
+                <h2 class="user-name">{{ current_user.first_name }} {{ current_user.last_name }}</h2>
+                <p class="user-email">{{ current_user.email }}</p>
+                <a class="signout-btn" href="{% url 'logout' %}">Sign Out</a>
+            </div>
             <div class="balance-card">
                 <span>Current balance</span>
-                <h2 class="balance"></h2>
+                <h2 class="balance">{{ current_balance }}</h2>
             </div>
             <nav class="nav">
                 <ul>

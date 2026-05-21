@@ -9,7 +9,30 @@ from .models import Balance, User as FinanceUser
 def pft(request):
     return render(request, 'pft.html')
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    user_id = request.session.get('user_id')
+    if not user_id:
+        messages.error(request, 'Please sign in to access the dashboard.')
+        return redirect('login')
+
+    try:
+        user = FinanceUser.objects.get(id=user_id)
+    except FinanceUser.DoesNotExist:
+        request.session.flush()
+        messages.error(request, 'Your session has expired. Please sign in again.')
+        return redirect('login')
+
+    balance = getattr(user, 'balance', None)
+    context = {
+        'current_user': user,
+        'current_balance': balance.total_amount if balance else 0,
+    }
+    return render(request, 'dashboard.html', context)
+
+def logout(request):
+    request.session.flush()
+    messages.success(request, 'You have been signed out.')
+    return redirect('login')
+
 def support(request):
     return render(request, 'support.html')
 

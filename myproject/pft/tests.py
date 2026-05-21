@@ -76,3 +76,46 @@ class LoginViewTests(TestCase):
 
 		self.assertEqual(response.status_code, 400)
 		self.assertNotIn('user_id', self.client.session)
+
+
+class DashboardViewTests(TestCase):
+	def setUp(self):
+		self.user = User.objects.create(
+			first_name='Jane',
+			last_name='Doe',
+			email='jane@example.com',
+			phone='1234567890',
+			password=make_password('StrongPass123'),
+		)
+		Balance.objects.create(user=self.user, total_amount=250)
+
+	def test_dashboard_redirects_when_logged_out(self):
+		response = self.client.get(reverse('dashboard'))
+
+		self.assertRedirects(response, reverse('login'))
+
+	def test_dashboard_shows_current_user_and_balance(self):
+		session = self.client.session
+		session['user_id'] = self.user.id
+		session['user_email'] = self.user.email
+		session['user_name'] = f'{self.user.first_name} {self.user.last_name}'
+		session.save()
+
+		response = self.client.get(reverse('dashboard'))
+
+		self.assertEqual(response.status_code, 200)
+		self.assertContains(response, 'Jane Doe')
+		self.assertContains(response, 'jane@example.com')
+		self.assertContains(response, '250')
+
+	def test_logout_clears_session_and_redirects(self):
+		session = self.client.session
+		session['user_id'] = self.user.id
+		session['user_email'] = self.user.email
+		session['user_name'] = f'{self.user.first_name} {self.user.last_name}'
+		session.save()
+
+		response = self.client.get(reverse('logout'))
+
+		self.assertRedirects(response, reverse('login'))
+		self.assertNotIn('user_id', self.client.session)
