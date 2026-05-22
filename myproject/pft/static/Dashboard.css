@@ -22,7 +22,7 @@ a {
 .sidebar {
     background: #3200ff;
     color: #fff;
-    width: 280px;
+    width: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -224,10 +224,10 @@ a {
 /* Main Content Area */
 .main-content {
     flex: 1;
-    margin-left: 280px; /* Width of fixed sidebar */
-    padding: 60px 80px;
+    margin-left: 300px; /* Width of fixed sidebar */
+    padding: 0px 80px;
     background: #ffffff;
-    min-height: 100vh;
+    min-height: 80vh;
     box-sizing: border-box;
 }
 
