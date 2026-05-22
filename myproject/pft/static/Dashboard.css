@@ -1,16 +1,16 @@
+/* Global Styles */
 body {
     font-family: 'Jost', sans-serif;
-    background: #fff;
+    background: #f8f9fa;
     margin: 0;
     padding: 0;
+    color: #333;
 }
-a{
-    transition: color 0.2s;
+
+a {
+    transition: all 0.2s ease;
     text-decoration: none;
-    color: #ffffff;
-}
-a:hover{
-    color: #bfb5ff;
+    color: inherit;
 }
 
 .container {
@@ -18,116 +18,147 @@ a:hover{
     min-height: 100vh;
 }
 
+/* Sidebar Styling */
 .sidebar {
     background: #3200ff;
     color: #fff;
-    width: 300px;
+    width: 280px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding: 40px 20px;
     box-sizing: border-box;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
 }
 
+/* Balance Card */
 .balance-card {
-    background: #fff;
-    color: #222;
-    border-radius: 12px;
-    padding: 25px 30px;
-    margin-bottom: 30px;
-    box-shadow: 0px 11px 26px -8px rgba(0,0,0,0.52);
+    background: #ffffff;
+    color: #1a1a1a;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     text-align: left;
-    width: 200px;
+    width: 100%;
+    max-width: 220px;
     box-sizing: border-box;
 }
 
 .balance-card span {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     display: block;
-    margin-bottom: 8px;
-    color: #555;
+    margin-bottom: 6px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
 }
 
 .balance-card h2 {
-    font-size: 1.6rem;
-    font-weight: 600;
+    font-size: 1.75rem;
+    font-weight: 700;
     margin: 0;
+    color: #3200ff;
 }
 
+/* Navigation */
 .nav {
     flex-grow: 1;
-    width: 200px;
+    width: 100%;
+    max-width: 220px;
 }
 
 .nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    text-decoration: none;
 }
 
 .nav li {
-    font-size: 1.4rem;
-    margin: 20px 0;
-    text-align: left;
+    font-size: 1.25rem;
+    margin: 15px 0;
+    padding: 12px 16px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: color 0.2s;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.nav li a {
+    color: #fff;
+    display: block;
+    width: 100%;
 }
 
 .nav li:hover {
-    color: #bfb5ff;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
 }
 
-/* User Card Styles - Positioned at bottom */
+.nav li.Dashboard-tab {
+    background: rgba(255, 255, 255, 0.15);
+    font-weight: 600;
+}
+
+/* User Card - Refined Design */
 .user-card {
     position: relative;
     margin-top: auto;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 12px 20px;
-    border-radius: 12px;
+    padding: 14px 20px;
+    border-radius: 14px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    width: 200px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    max-width: 220px;
     box-sizing: border-box;
 }
 
 .user-card:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
 }
 
 .user-card-summary {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
 }
 
 .signed-in-text {
-    font-size: 0.85rem;
-    font-weight: 300;
-    opacity: 0.8;
+    font-size: 0.75rem;
+    font-weight: 400;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .user-display-name {
     font-size: 1.1rem;
     font-weight: 600;
+    margin-top: 2px;
 }
 
+/* User Card Popup */
 .user-card-popup {
     position: absolute;
-    bottom: calc(100% + 15px); /* Position above the card since it's at the bottom */
+    bottom: calc(100% + 15px);
     left: 0;
     background: #ffffff;
-    color: #222;
-    width: 240px;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    color: #1a1a1a;
+    width: 260px;
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px);
+    transform: translateY(15px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1000;
 }
@@ -138,38 +169,38 @@ a:hover{
     transform: translateY(0);
 }
 
-/* Triangle for the popup - pointing down */
+/* Triangle for the popup */
 .user-card-popup::before {
     content: '';
     position: absolute;
     bottom: -6px;
-    left: 20px;
-    width: 12px;
-    height: 12px;
+    left: 24px;
+    width: 14px;
+    height: 14px;
     background: #ffffff;
     transform: rotate(45deg);
 }
 
 .popup-header {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .popup-header h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 0 0 4px 0;
-    color: #1a1a1a;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    color: #3200ff;
 }
 
 .popup-header p {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     margin: 0;
     color: #666;
 }
 
 .popup-actions {
-    border-top: 1px solid #eee;
-    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 18px;
 }
 
 .signout-btn {
@@ -177,62 +208,69 @@ a:hover{
     background: #ff4757;
     color: #fff !important;
     text-align: center;
-    padding: 10px;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: background 0.2s;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
 }
 
 .signout-btn:hover {
     background: #ff6b81;
-    color: #fff !important;
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
 }
 
+/* Main Content Area */
 .main-content {
     flex: 1;
-    background: #fff;
-    padding: 0px 40px 0px 200px;
-    border-radius: 0 10px 10px 0;
-    box-shadow: 0 0 0 2px #ccc;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    margin-left: 280px; /* Width of fixed sidebar */
+    padding: 60px 80px;
+    background: #ffffff;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .form-section {
-    margin-bottom: 40px;
-    max-width: 600px;
+    margin-bottom: 50px;
+    max-width: 800px;
 }
 
 .form-section h3 {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 18px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #1a1a1a;
 }
 
 .form {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
 }
 
 .form-row {
     display: flex;
-    gap: 20px;
+    gap: 24px;
 }
 
-.form input[type="number"],
-.form input[type="date"],
-.form input[type="text"] {
-    background: #f3f3f3;
-    border: none;
-    border-radius: 7px;
-    padding: 14px 16px;
+.form input {
+    background: #f1f3f5;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 16px 20px;
     font-size: 1rem;
     width: 100%;
     box-sizing: border-box;
     outline: none;
+    font-family: 'Jost', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.form input:focus {
+    background: #fff;
+    border-color: #3200ff;
+    box-shadow: 0 0 0 4px rgba(50, 0, 255, 0.1);
 }
 
 .form-row input {
@@ -243,174 +281,94 @@ a:hover{
     background: #3200ff;
     color: #fff;
     border: none;
-    border-radius: 8px;
-    padding: 14px 0;
-    font-size: 1.2rem;
-    font-family: 'Jost', sans-serif;
-    font-weight: 400;
+    border-radius: 12px;
+    padding: 16px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
     cursor: pointer;
-    margin-top: 8px;
-    transition: background 0.2s;
-    transition: color 0.2s;
+    margin-top: 10px;
+    transition: all 0.2s ease;
 }
 
 .submit-btn:hover {
-    background: #4d22e6;
-    color: #e6e0ff;
+    background: #2511b8;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(50, 0, 255, 0.2);
 }
 
-.income-section {
-    margin-top: 30px;
-    max-width: 700px;
-    display: none;
+/* Tables Styling */
+.income-section, .expenses-section {
+    margin-top: 40px;
+    max-width: 900px;
 }
 
-.income-table {
+table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    font-family: 'Jost', sans-serif;
+    border-collapse: separate;
+    border-spacing: 0 10px;
 }
 
-.income-table th,
-.income-table td {
-    border: 1px solid #222;
-    padding: 10px 0;
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 400;
-}
-
-.income-table th {
+th {
+    text-align: left;
+    padding: 12px 20px;
+    color: #666;
     font-weight: 500;
-    background: #fff;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
 }
 
-.income-table td {
-    background: #fff;
+td {
+    padding: 16px 20px;
+    background: #f8f9fa;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 
-.income-table th:last-child,
-.income-table td:last-child {
-    width: 80px;
+td:first-child {
+    border-left: 1px solid #eee;
+    border-radius: 12px 0 0 12px;
 }
 
-.income-row{
-    border: 1px solid #222;
-    padding: 10px 0;
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 400;
+td:last-child {
+    border-right: 1px solid #eee;
+    border-radius: 0 12px 12px 0;
 }
 
-.expenses-section {
-    margin-top: 30px;
-    max-width: 700px;
-    display: none;
-}
-
-.expenses-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    font-family: 'Jost', sans-serif;
-}
-
-.expenses-table th,
-.expenses-table td {
-    border: 1px solid #222;
-    padding: 10px 0;
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 400;
-}
-
-.expenses-table th {
-    font-weight: 500;
-    background: #fff;
-}
-
-.expenses-table td {
-    background: #fff;
-}
-
-.expenses-table th:last-child,
-.expenses-table td:last-child {
-    width: 80px;
-}
-
-.expenses-row{
-    border: 1px solid #222;
-    padding: 10px 0;
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 400;
-}
-
-.delete-icon {
-    display: none;
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 240px;
+    }
+    .main-content {
+        margin-left: 240px;
+        padding: 40px;
+    }
 }
 
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
     }
-
     .sidebar {
+        position: relative;
         width: 100%;
-        box-sizing: border-box;
+        height: auto;
         padding: 30px 20px;
     }
-
-    .balance-card {
-        margin-bottom: 20px;
-        width: calc(100% - 60px);
-        max-width: 320px;
-        box-sizing: border-box;
-    }
-
-    .nav ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-        margin: 0;
-        padding: 0;
-    }
-
-    .nav li {
-        margin: 10px 0;
-        font-size: 1.3rem;
-    }
-
     .main-content {
+        margin-left: 0;
         padding: 30px 20px;
-        box-shadow: none;
-        border-radius: 0;
     }
-
-    .form-section {
-        max-width: 100%;
+    .user-card-popup {
+        left: 50%;
+        transform: translateX(-50%) translateY(15px);
     }
-
-    .form-row {
-        flex-direction: column;
-        gap: 12px;
+    .user-card:hover .user-card-popup {
+        transform: translateX(-50%) translateY(0);
     }
-
-    .form-row input {
-        width: 100%;
-    }
-
-    .income-section,
-    .expenses-section {
-        max-width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .income-table,
-    .expenses-table {
-        min-width: 500px;
+    .user-card-popup::before {
+        left: 50%;
+        margin-left: -7px;
     }
 }
