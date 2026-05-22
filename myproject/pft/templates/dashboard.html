@@ -19,12 +19,7 @@
 <body>
     <div class="container">
         <aside class="sidebar">
-            <div class="user-card">
-                <span>Signed in as</span>
-                <h2 class="user-name">{{ current_user.first_name }} {{ current_user.last_name }}</h2>
-                <p class="user-email">{{ current_user.email }}</p>
-                <a class="signout-btn" href="{% url 'logout' %}">Sign Out</a>
-            </div>
+            
             <div class="balance-card">
                 <span>Current balance</span>
                 <h2 class="balance">{{ current_balance }}</h2>
@@ -37,6 +32,21 @@
                     <li class="expenses-tab">Expenses</li>
                 </ul>
             </nav>
+            <div class="user-card">
+                <div class="user-card-summary">
+                    <span class="signed-in-text">Signed in as</span>
+                    <span class="user-display-name">{{ current_user.first_name }}</span>
+                </div>
+                <div class="user-card-popup">
+                    <div class="popup-header">
+                        <h2 class="user-name">{{ current_user.first_name }} {{ current_user.last_name }}</h2>
+                        <p class="user-email">{{ current_user.email }}</p>
+                    </div>
+                    <div class="popup-actions">
+                        <a class="signout-btn" href="{% url 'logout' %}">Sign Out</a>
+                    </div>
+                </div>
+            </div>
         </aside>
         <main class="main-content">
             <section class="form-section">
