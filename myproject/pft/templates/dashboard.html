@@ -19,7 +19,7 @@
 <body>
     <div class="container">
         <aside class="sidebar">
-            
+
             <div class="balance-card">
                 <span>Current balance</span>
                 <h2 class="balance">{{ current_balance }}</h2>
@@ -49,60 +49,42 @@
             </div>
         </aside>
         <main class="main-content">
+            {% if messages %}
+            <div class="messages-container">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" id="msg-{{ forloop.counter }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
             <section class="form-section">
                 <h3>Log income</h3>
-                <form class="form">
+                <form class="form" method="POST" action="{% url 'add_income' %}">
+                    {% csrf_token %}
                     <div class="form-row">
-                        <input type="number" placeholder="Amount" class="income-amount-input" required>
-                        <input type="date" class="income-date-input" required>
+                        <input type="number" name="amount" step="0.01" min="0.01" placeholder="Amount"
+                            class="income-amount-input" required>
                     </div>
-                    <input type="text" placeholder="Description" class="income-description-input" required>
+                    <input type="text" name="source" placeholder="Description (e.g. Salary, Freelance)"
+                        class="income-description-input" required>
                     <button type="submit" class="submit-btn income-submit">Submit</button>
                 </form>
             </section>
             <section class="form-section">
                 <h3>Log expenses</h3>
-                <form class="form">
+                <form class="form" method="POST" action="{% url 'add_expense' %}">
+                    {% csrf_token %}
                     <div class="form-row">
-                        <input type="number" placeholder="Amount" class="expenses-amount-input" required>
-                        <input type="date" class="expenses-date-input" required>
+                        <input type="number" name="amount" step="0.01" min="0.01" placeholder="Amount"
+                            class="expenses-amount-input" required>
                     </div>
-                    <input type="text" placeholder="Description" class="expenses-description-input" required>
+                    <input type="text" name="expense" placeholder="Description (e.g. Rent, Groceries)"
+                        class="expenses-description-input" required>
                     <button type="submit" class="submit-btn expenses-submit">Submit</button>
                 </form>
             </section>
-            <section class="income-section">
-                <h3>Income</h3>
-                <table class="income-table">
-                    <thead>
-                        <tr>
-                            <th>date</th>
-                            <th>description</th>
-                            <th>amount</th>
 
-                        </tr>
-                    </thead>
-                    <tbody class="income-rows">
-
-                    </tbody>
-                </table>
-            </section>
-            <section class="expenses-section">
-                <h3>Expenses</h3>
-                <table class="expenses-table">
-                    <thead>
-                        <tr>
-                            <th>date</th>
-                            <th>description</th>
-                            <th>amount</th>
-
-                        </tr>
-                    </thead>
-                    <tbody class="expenses-rows">
-                       
-                    </tbody>
-                </table>
-            </section> 
         </main>
     </div>
 

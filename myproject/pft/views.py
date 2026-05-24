@@ -1,32 +1,113 @@
+from decimal import Decimal, InvalidOperation
+
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 from django.db import IntegrityError, transaction
 from django.shortcuts import redirect, render
 
-from .models import Balance, User as FinanceUser
+from .models import Balance, Expense, Income, User as FinanceUser
+
+
+def _get_logged_in_user(request):
+    """Return the logged-in FinanceUser or None (flushing stale sessions)."""
+    user_id = request.session.get('user_id')
+    if not user_id:
+        return None
+    try:
+        return FinanceUser.objects.get(id=user_id)
+    except FinanceUser.DoesNotExist:
+        request.session.flush()
+        return None
 
 def pft(request):
     return render(request, 'pft.html')
 def dashboard(request):
-    user_id = request.session.get('user_id')
-    if not user_id:
+    user = _get_logged_in_user(request)
+    if user is None:
         messages.error(request, 'Please sign in to access the dashboard.')
         return redirect('login')
 
-    try:
-        user = FinanceUser.objects.get(id=user_id)
-    except FinanceUser.DoesNotExist:
-        request.session.flush()
-        messages.error(request, 'Your session has expired. Please sign in again.')
-        return redirect('login')
-
     balance = getattr(user, 'balance', None)
+    incomes = Income.objects.filter(user=user).order_by('-created_at')
+    expenses = Expense.objects.filter(user=user).order_by('-created_at')
     context = {
         'current_user': user,
         'current_balance': balance.total_amount if balance else 0,
+        'incomes': incomes,
+        'expenses': expenses,
     }
     return render(request, 'dashboard.html', context)
+
+
+def add_income(request):
+    """Handle POST to log a new income entry."""
+    if request.method != 'POST':
+        return redirect('dashboard')
+
+    user = _get_logged_in_user(request)
+    if user is None:
+        messages.error(request, 'Please sign in to log income.')
+        return redirect('login')
+
+    amount_str = request.POST.get('amount', '').strip()
+    source = request.POST.get('source', '').strip()
+
+    if not amount_str or not source:
+        messages.error(request, 'Amount and description are required.')
+        return redirect('dashboard')
+
+    try:
+        amount = Decimal(amount_str)
+        if amount <= 0:
+            raise InvalidOperation
+    except InvalidOperation:
+        messages.error(request, 'Please enter a valid positive amount.')
+        return redirect('dashboard')
+
+    with transaction.atomic():
+        Income.objects.create(user=user, amount=amount, source=source)
+        bal, _ = Balance.objects.get_or_create(user=user)
+        bal.total_amount += amount
+        bal.save()
+
+    messages.success(request, f'Income of {amount} recorded.')
+    return redirect('dashboard')
+
+
+def add_expense(request):
+    """Handle POST to log a new expense entry."""
+    if request.method != 'POST':
+        return redirect('dashboard')
+
+    user = _get_logged_in_user(request)
+    if user is None:
+        messages.error(request, 'Please sign in to log expenses.')
+        return redirect('login')
+
+    amount_str = request.POST.get('amount', '').strip()
+    expense_desc = request.POST.get('expense', '').strip()
+
+    if not amount_str or not expense_desc:
+        messages.error(request, 'Amount and description are required.')
+        return redirect('dashboard')
+
+    try:
+        amount = Decimal(amount_str)
+        if amount <= 0:
+            raise InvalidOperation
+    except InvalidOperation:
+        messages.error(request, 'Please enter a valid positive amount.')
+        return redirect('dashboard')
+
+    with transaction.atomic():
+        Expense.objects.create(user=user, amount=amount, expense=expense_desc)
+        bal, _ = Balance.objects.get_or_create(user=user)
+        bal.total_amount -= amount
+        bal.save()
+
+    messages.success(request, f'Expense of {amount} recorded.')
+    return redirect('dashboard')
 
 def logout(request):
     request.session.flush()
