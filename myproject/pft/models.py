@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class User(models.Model):
@@ -16,7 +17,7 @@ class Income(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='incomes')
     amount = models.DecimalField(max_digits=12, decimal_places=2)
     source = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"Income: {self.amount} from {self.source} (User: {self.user_id})"
@@ -26,7 +27,7 @@ class Expense(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='expenses')
     amount = models.DecimalField(max_digits=12, decimal_places=2)
     expense = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"Expense: {self.amount} for {self.expense} (User: {self.user_id})"

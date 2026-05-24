@@ -1,3 +1,4 @@
+from datetime import datetime
 from decimal import Decimal, InvalidOperation
 
 from django.contrib import messages
@@ -5,6 +6,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 from django.db import IntegrityError, transaction
 from django.shortcuts import redirect, render
+from django.utils import timezone
 
 from .models import Balance, Expense, Income, User as FinanceUser
 
@@ -52,6 +54,7 @@ def add_income(request):
 
     amount_str = request.POST.get('amount', '').strip()
     source = request.POST.get('source', '').strip()
+    date_str = request.POST.get('date', '').strip()
 
     if not amount_str or not source:
         messages.error(request, 'Amount and description are required.')
@@ -65,8 +68,15 @@ def add_income(request):
         messages.error(request, 'Please enter a valid positive amount.')
         return redirect('dashboard')
 
+    created_at = timezone.now()
+    if date_str:
+        try:
+            created_at = timezone.make_aware(datetime.strptime(date_str, '%Y-%m-%d'))
+        except ValueError:
+            pass
+
     with transaction.atomic():
-        Income.objects.create(user=user, amount=amount, source=source)
+        Income.objects.create(user=user, amount=amount, source=source, created_at=created_at)
         bal, _ = Balance.objects.get_or_create(user=user)
         bal.total_amount += amount
         bal.save()
@@ -87,6 +97,7 @@ def add_expense(request):
 
     amount_str = request.POST.get('amount', '').strip()
     expense_desc = request.POST.get('expense', '').strip()
+    date_str = request.POST.get('date', '').strip()
 
     if not amount_str or not expense_desc:
         messages.error(request, 'Amount and description are required.')
@@ -100,8 +111,15 @@ def add_expense(request):
         messages.error(request, 'Please enter a valid positive amount.')
         return redirect('dashboard')
 
+    created_at = timezone.now()
+    if date_str:
+        try:
+            created_at = timezone.make_aware(datetime.strptime(date_str, '%Y-%m-%d'))
+        except ValueError:
+            pass
+
     with transaction.atomic():
-        Expense.objects.create(user=user, amount=amount, expense=expense_desc)
+        Expense.objects.create(user=user, amount=amount, expense=expense_desc, created_at=created_at)
         bal, _ = Balance.objects.get_or_create(user=user)
         bal.total_amount -= amount
         bal.save()
