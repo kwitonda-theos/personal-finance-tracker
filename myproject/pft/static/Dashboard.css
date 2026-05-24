@@ -100,7 +100,7 @@ a {
     transform: translateX(5px);
 }
 
-.nav li.Dashboard-tab {
+.nav li.active-tab {
     background: rgba(255, 255, 255, 0.15);
     font-weight: 600;
 }

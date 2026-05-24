@@ -42,6 +42,37 @@ def dashboard(request):
     return render(request, 'dashboard.html', context)
 
 
+def income_page(request):
+    user = _get_logged_in_user(request)
+    if user is None:
+        messages.error(request, 'Please sign in to access this page.')
+        return redirect('login')
+
+    balance = getattr(user, 'balance', None)
+    incomes = Income.objects.filter(user=user).order_by('-created_at')
+    context = {
+        'current_user': user,
+        'current_balance': balance.total_amount if balance else 0,
+        'incomes': incomes,
+    }
+    return render(request, 'income.html', context)
+
+
+def expenses_page(request):
+    user = _get_logged_in_user(request)
+    if user is None:
+        messages.error(request, 'Please sign in to access this page.')
+        return redirect('login')
+
+    balance = getattr(user, 'balance', None)
+    expenses = Expense.objects.filter(user=user).order_by('-created_at')
+    context = {
+        'current_user': user,
+        'current_balance': balance.total_amount if balance else 0,
+        'expenses': expenses,
+    }
+    return render(request, 'expenses.html', context)
+
 def add_income(request):
     """Handle POST to log a new income entry."""
     if request.method != 'POST':

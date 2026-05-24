@@ -4,13 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Finance Dashboard</title>
+    <title>Income — Personal Finance Tracker</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-
 
     {% load static %}
     <link rel="stylesheet" href="{% static 'Dashboard.css' %}">
@@ -27,8 +26,8 @@
             <nav class="nav">
                 <ul>
                     <li class="home-tab"><a href="{% url 'pft' %}">Home</a></li>
-                    <li class="Dashboard-tab active-tab"><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                    <li class="income-tab"><a href="{% url 'income_page' %}">Income</a></li>
+                    <li class="Dashboard-tab"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li class="income-tab active-tab"><a href="{% url 'income_page' %}">Income</a></li>
                     <li class="expenses-tab"><a href="{% url 'expenses_page' %}">Expenses</a></li>
                 </ul>
             </nav>
@@ -72,19 +71,28 @@
                     <button type="submit" class="submit-btn income-submit">Submit</button>
                 </form>
             </section>
-            <section class="form-section">
-                <h3>Log expenses</h3>
-                <form class="form" method="POST" action="{% url 'add_expense' %}">
-                    {% csrf_token %}
-                    <div class="form-row">
-                        <input type="number" name="amount" step="0.01" min="0.01" placeholder="Amount"
-                            class="expenses-amount-input" required>
-                        <input type="date" name="date" class="expenses-date-input" required>
-                    </div>
-                    <input type="text" name="expense" placeholder="Description (e.g. Rent, Groceries)"
-                        class="expenses-description-input" required>
-                    <button type="submit" class="submit-btn expenses-submit">Submit</button>
-                </form>
+            <section class="income-section">
+                <h3>Income</h3>
+                <table class="income-table">
+                    <thead>
+                        <tr>
+                            <th>date</th>
+                            <th>description</th>
+                            <th>amount</th>
+                        </tr>
+                    </thead>
+                    <tbody class="income-rows">
+                        {% for inc in incomes %}
+                        <tr>
+                            <td>{{ inc.created_at|date:"Y-m-d" }}</td>
+                            <td>{{ inc.source }}</td>
+                            <td>{{ inc.amount }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr class="empty-row"><td colspan="3">No income recorded yet.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </section>
         </main>
     </div>
