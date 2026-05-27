@@ -29,6 +29,9 @@
             <input type="password" id="password" name="password" required placeholder="Enter your password">
             
             <button type="submit">Log In</button>
+
+            <div class="auth-divider"><span>or</span></div>
+            <a class="google-auth-btn" href="/accounts/google/login/">Continue with Google</a>
             
             <p>Don't have an account? <a href="{% url 'register' %}">Sign Up</a></p>
             <p style="margin-top: 8px;"><a href="{% url 'pft' %}">&larr; Back to Home</a></p>

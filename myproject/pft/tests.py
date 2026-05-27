@@ -1,4 +1,5 @@
 from django.contrib.auth.hashers import check_password, make_password
+from django.contrib.auth.models import User as AuthUser
 from django.test import TestCase
 from django.urls import reverse
 
@@ -20,6 +21,8 @@ class RegisterViewTests(TestCase):
 		)
 
 		self.assertRedirects(response, reverse('login'))
+		auth_user = AuthUser.objects.get(email='jane@example.com')
+		self.assertEqual(auth_user.username, 'jane@example.com')
 		user = User.objects.get(email='jane@example.com')
 		self.assertEqual(user.first_name, 'Jane')
 		self.assertTrue(check_password('StrongPass123', user.password))
@@ -44,6 +47,13 @@ class RegisterViewTests(TestCase):
 
 class LoginViewTests(TestCase):
 	def setUp(self):
+		AuthUser.objects.create_user(
+			username='jane@example.com',
+			email='jane@example.com',
+			password='StrongPass123',
+			first_name='Jane',
+			last_name='Doe',
+		)
 		self.user = User.objects.create(
 			first_name='Jane',
 			last_name='Doe',
@@ -64,6 +74,7 @@ class LoginViewTests(TestCase):
 		self.assertRedirects(response, reverse('dashboard'))
 		self.assertEqual(self.client.session['user_id'], self.user.id)
 		self.assertEqual(self.client.session['user_email'], 'jane@example.com')
+		self.assertEqual(self.client.session['user_name'], 'Jane Doe')
 
 	def test_login_rejects_invalid_password(self):
 		response = self.client.post(

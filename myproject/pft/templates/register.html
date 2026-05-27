@@ -46,6 +46,9 @@
             <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm your password">
             
             <button type="submit">Register</button>
+
+            <div class="auth-divider"><span>or</span></div>
+            <a class="google-auth-btn" href="/accounts/google/login/">Continue with Google</a>
             
             <p>Already have an account? <a href="{% url 'login' %}">Sign In</a></p>
             <p style="margin-top: 8px;"><a href="{% url 'pft' %}">&larr; Back to Home</a></p>

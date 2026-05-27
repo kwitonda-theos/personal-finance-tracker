@@ -2,19 +2,23 @@ from datetime import datetime
 from decimal import Decimal, InvalidOperation
 
 from django.contrib import messages
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth.models import User as AuthUser
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth.hashers import check_password
 from django.db import IntegrityError, transaction
 from django.shortcuts import redirect, render
 from django.utils import timezone
 
 from .models import Balance, Expense, Income, User as FinanceUser
+from .signals import sync_finance_user_from_auth_user
 
 
 def _get_logged_in_user(request):
     """Return the logged-in FinanceUser or None (flushing stale sessions)."""
     user_id = request.session.get('user_id')
     if not user_id:
+        if getattr(request, 'user', None) and request.user.is_authenticated:
+            return sync_finance_user_from_auth_user(request, request.user)
         return None
     try:
         return FinanceUser.objects.get(id=user_id)
@@ -159,6 +163,7 @@ def add_expense(request):
     return redirect('dashboard')
 
 def logout(request):
+    auth_logout(request)
     request.session.flush()
     messages.success(request, 'You have been signed out.')
     return redirect('login')
@@ -175,19 +180,13 @@ def login(request):
             messages.error(request, 'Email and password are required.')
             return render(request, 'login.html', {'form_data': {'email': email}}, status=400)
 
-        try:
-            user = FinanceUser.objects.get(email=email)
-        except FinanceUser.DoesNotExist:
+        user = authenticate(request, username=email, password=password)
+        if user is None:
             messages.error(request, 'Invalid email or password.')
             return render(request, 'login.html', {'form_data': {'email': email}}, status=400)
 
-        if not check_password(password, user.password):
-            messages.error(request, 'Invalid email or password.')
-            return render(request, 'login.html', {'form_data': {'email': email}}, status=400)
-
-        request.session['user_id'] = user.id
-        request.session['user_email'] = user.email
-        request.session['user_name'] = f'{user.first_name} {user.last_name}'.strip()
+        auth_login(request, user)
+        sync_finance_user_from_auth_user(request, user)
         messages.success(request, 'Logged in successfully.')
         return redirect('dashboard')
 
@@ -217,12 +216,23 @@ def register(request):
             messages.error(request, 'Passwords do not match.')
             return render(request, 'register.html', {'form_data': form_data}, status=400)
 
+        if AuthUser.objects.filter(email=email).exists() or AuthUser.objects.filter(username=email).exists():
+            messages.error(request, 'An account with that email already exists.')
+            return render(request, 'register.html', {'form_data': form_data}, status=400)
+
         if FinanceUser.objects.filter(email=email).exists():
             messages.error(request, 'An account with that email already exists.')
             return render(request, 'register.html', {'form_data': form_data}, status=400)
 
         try:
             with transaction.atomic():
+                auth_user = AuthUser.objects.create_user(
+                    username=email,
+                    email=email,
+                    password=password,
+                    first_name=first_name,
+                    last_name=last_name,
+                )
                 user = FinanceUser.objects.create(
                     first_name=first_name,
                     last_name=last_name,
