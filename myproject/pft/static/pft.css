@@ -291,6 +291,11 @@
     transform: translateY(-1px);
 }
 
+.google-icon {
+    width: 20px;
+    height: 20px;
+}
+
 .auth-form p {
     text-align: center;
     margin-top: 20px;
