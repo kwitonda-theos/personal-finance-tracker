@@ -72,7 +72,33 @@
                 </form>
             </section>
             <section class="expenses-section">
-                <h3>Expenses</h3>
+                <div class="table-header">
+                    <h3>Expenses</h3>
+                    <div class="filter-toolbar">
+                        <div class="filter-dropdown" id="expenses-filter-dropdown">
+                            <button class="filter-btn" type="button" id="expenses-filter-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                                </svg>
+                                <span id="expenses-filter-label">Filter</span>
+                                <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="filter-menu" id="expenses-filter-menu">
+                                <button class="filter-option active" data-filter="all" data-table="expenses">All</button>
+                                <button class="filter-option" data-filter="month" data-table="expenses">Month</button>
+                                <button class="filter-option" data-filter="week" data-table="expenses">Week</button>
+                                <button class="filter-option" data-filter="date" data-table="expenses">Date</button>
+                                <button class="filter-option" data-filter="description" data-table="expenses">Description</button>
+                            </div>
+                        </div>
+                        <div class="filter-input-wrapper" id="expenses-filter-input-wrapper" style="display:none;">
+                            <input type="text" class="filter-input" id="expenses-filter-input" placeholder="Search...">
+                            <button class="filter-clear-btn" id="expenses-filter-clear" title="Clear filter">&times;</button>
+                        </div>
+                    </div>
+                </div>
                 <table class="expenses-table">
                     <thead>
                         <tr>

@@ -72,7 +72,33 @@
                 </form>
             </section>
             <section class="income-section">
-                <h3>Income</h3>
+                <div class="table-header">
+                    <h3>Income</h3>
+                    <div class="filter-toolbar">
+                        <div class="filter-dropdown" id="income-filter-dropdown">
+                            <button class="filter-btn" type="button" id="income-filter-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                                </svg>
+                                <span id="income-filter-label">Filter</span>
+                                <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="filter-menu" id="income-filter-menu">
+                                <button class="filter-option active" data-filter="all" data-table="income">All</button>
+                                <button class="filter-option" data-filter="month" data-table="income">Month</button>
+                                <button class="filter-option" data-filter="week" data-table="income">Week</button>
+                                <button class="filter-option" data-filter="date" data-table="income">Date</button>
+                                <button class="filter-option" data-filter="description" data-table="income">Description</button>
+                            </div>
+                        </div>
+                        <div class="filter-input-wrapper" id="income-filter-input-wrapper" style="display:none;">
+                            <input type="text" class="filter-input" id="income-filter-input" placeholder="Search...">
+                            <button class="filter-clear-btn" id="income-filter-clear" title="Clear filter">&times;</button>
+                        </div>
+                    </div>
+                </div>
                 <table class="income-table">
                     <thead>
                         <tr>
