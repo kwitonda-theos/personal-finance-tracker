@@ -21,7 +21,7 @@ def _get_logged_in_user(request):
             return sync_finance_user_from_auth_user(request, request.user)
         return None
     try:
-        return FinanceUser.objects.get(id=user_id)
+        return FinanceUser.objects.select_related('balance').get(id=user_id)
     except FinanceUser.DoesNotExist:
         request.session.flush()
         return None
@@ -186,7 +186,7 @@ def login(request):
             return render(request, 'login.html', {'form_data': {'email': email}}, status=400)
 
         auth_login(request, user)
-        sync_finance_user_from_auth_user(request, user)
+        # sync_finance_user is already called by the user_logged_in signal
         messages.success(request, 'Logged in successfully.')
         return redirect('dashboard')
 

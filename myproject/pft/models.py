@@ -17,7 +17,12 @@ class Income(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='incomes')
     amount = models.DecimalField(max_digits=12, decimal_places=2)
     source = models.CharField(max_length=255)
-    created_at = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now, db_index=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['user', '-created_at'], name='income_user_date_idx'),
+        ]
 
     def __str__(self):
         return f"Income: {self.amount} from {self.source} (User: {self.user_id})"
@@ -27,7 +32,12 @@ class Expense(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='expenses')
     amount = models.DecimalField(max_digits=12, decimal_places=2)
     expense = models.CharField(max_length=255)
-    created_at = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now, db_index=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['user', '-created_at'], name='expense_user_date_idx'),
+        ]
 
     def __str__(self):
         return f"Expense: {self.amount} for {self.expense} (User: {self.user_id})"
