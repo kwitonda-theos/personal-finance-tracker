@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     {% load static %}
     <link rel="stylesheet" href="{% static 'pft.css' %}">
+    <link rel="stylesheet" href="{% static 'toast.css' %}">
 </head>
 <body>
     <div class="auth-container">
@@ -17,9 +18,9 @@
             <h2>Sign In</h2>
 
             {% if messages %}
-                {% for message in messages %}
-                    <p class="form-message">{{ message }}</p>
-                {% endfor %}
+            <script id="django-messages-data" type="application/json">[
+                {% for message in messages %}{ "tags": "{{ message.tags }}", "message": "{{ message }}" }{% if not forloop.last %},{% endif %}{% endfor %}
+            ]</script>
             {% endif %}
             
             <label for="email">Email</label>
@@ -46,5 +47,7 @@
             <p style="margin-top: 8px;"><a href="{% url 'pft' %}">&larr; Back to Home</a></p>
         </form>
     </div>
+    {% load static %}
+    <script src="{% static 'toast.js' %}"></script>
 </body>
 </html>

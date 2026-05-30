@@ -13,6 +13,7 @@
 
     {% load static %}
     <link rel="stylesheet" href="{% static 'Dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'toast.css' %}">
 </head>
 
 <body>
@@ -49,13 +50,9 @@
         </aside>
         <main class="main-content">
             {% if messages %}
-            <div class="messages-container">
-                {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}" id="msg-{{ forloop.counter }}">
-                    {{ message }}
-                </div>
-                {% endfor %}
-            </div>
+            <script id="django-messages-data" type="application/json">[
+                {% for message in messages %}{ "tags": "{{ message.tags }}", "message": "{{ message }}" }{% if not forloop.last %},{% endif %}{% endfor %}
+            ]</script>
             {% endif %}
             <section class="form-section">
                 <h3>Log expenses</h3>
@@ -124,6 +121,7 @@
     </div>
 
     {% load static %}
+    <script src="{% static 'toast.js' %}"></script>
     <script src="{% static 'Dashboard.js' %}"></script>
 </body>
 

@@ -341,32 +341,7 @@ td:last-child {
     font-style: italic;
 }
 
-/* Flash Messages */
-.messages-container {
-    margin-bottom: 24px;
-    max-width: 800px;
-}
 
-.alert {
-    padding: 14px 20px;
-    border-radius: 12px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    margin-bottom: 10px;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.alert-success {
-    background: #e6f9ed;
-    color: #1a7a3a;
-    border: 1px solid #b7e4c7;
-}
-
-.alert-error {
-    background: #fde8e8;
-    color: #b91c1c;
-    border: 1px solid #f5c6c6;
-}
 
 /* Filter Toolbar */
 .table-header {
