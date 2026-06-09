@@ -24,6 +24,9 @@
             <div class="balance-card">
                 <span>Current balance</span>
                 <h2 class="balance">{{ current_balance }}</h2>
+                <button id="reset-balance-btn" class="reset-balance-btn" type="button">
+                    &#8635; Reset Balance
+                </button>
             </div>
             <nav class="nav">
                 <ul>
@@ -86,9 +89,61 @@
         </main>
     </div>
 
+    <!-- Reset Balance Confirmation Modal -->
+    <div id="reset-balance-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title"
+        aria-describedby="modal-desc">
+        <div class="modal-box">
+            <div class="modal-icon">⚠️</div>
+            <h2 class="modal-title" id="modal-title">Reset Balance?</h2>
+            <p class="modal-desc" id="modal-desc">
+                This will permanently delete <strong>all income and expense records</strong> and reset your balance to
+                <strong>0.00 FRW</strong>.
+                <br><br>This action cannot be undone.
+            </p>
+            <div class="modal-actions">
+                <button id="modal-cancel-btn" class="modal-btn modal-btn-cancel" type="button">Cancel</button>
+                <form class="modal-confirm-form" method="POST" action="{% url 'reset_balance' %}">
+                    {% csrf_token %}
+                    <button id="modal-confirm-btn" class="modal-btn modal-btn-confirm" type="submit">Yes, Reset</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     {% load static %}
     <script src="{% static 'toast.js' %}"></script>
     <script src="{% static 'Dashboard.js' %}"></script>
+    <script>
+        // Reset Balance Modal Logic
+        const resetBtn = document.getElementById('reset-balance-btn');
+        const modal = document.getElementById('reset-balance-modal');
+        const cancelBtn = document.getElementById('modal-cancel-btn');
+
+        function openModal() {
+            modal.classList.add('modal-visible');
+            document.body.style.overflow = 'hidden';
+            cancelBtn.focus();
+        }
+
+        function closeModal() {
+            modal.classList.remove('modal-visible');
+            document.body.style.overflow = '';
+            resetBtn.focus();
+        }
+
+        resetBtn.addEventListener('click', openModal);
+        cancelBtn.addEventListener('click', closeModal);
+
+        // Close when clicking the dark overlay
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) closeModal();
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && modal.classList.contains('modal-visible')) closeModal();
+        });
+    </script>
 </body>
 
 </html>

@@ -162,6 +162,26 @@ def add_expense(request):
     messages.success(request, f'Expense of {amount} recorded.')
     return redirect('dashboard')
 
+def reset_balance(request):
+    """Handle POST to reset the user's balance and clear all income/expense records."""
+    if request.method != 'POST':
+        return redirect('dashboard')
+
+    user = _get_logged_in_user(request)
+    if user is None:
+        messages.error(request, 'Please sign in to perform this action.')
+        return redirect('login')
+
+    with transaction.atomic():
+        Income.objects.filter(user=user).delete()
+        Expense.objects.filter(user=user).delete()
+        bal, _ = Balance.objects.get_or_create(user=user)
+        bal.total_amount = Decimal('0.00')
+        bal.save()
+
+    messages.success(request, 'Your balance has been reset to 0.00 FRW and all records have been cleared.')
+    return redirect('dashboard')
+
 def logout(request):
     auth_logout(request)
     request.session.flush()

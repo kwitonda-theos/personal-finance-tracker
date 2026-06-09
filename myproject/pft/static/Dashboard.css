@@ -26,6 +26,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     padding: 40px 20px;
     box-sizing: border-box;
     position: fixed;
@@ -40,7 +41,6 @@ a {
     color: #1a1a1a;
     border-radius: 16px;
     padding: 24px;
-    margin-bottom: 40px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     text-align: left;
     width: 100%;
@@ -67,7 +67,6 @@ a {
 
 /* Navigation */
 .nav {
-    flex-grow: 1;
     width: 100%;
     max-width: 220px;
 }
@@ -108,7 +107,6 @@ a {
 /* User Card - Refined Design */
 .user-card {
     position: relative;
-    margin-top: auto;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 14px 20px;
@@ -224,7 +222,8 @@ a {
 /* Main Content Area */
 .main-content {
     flex: 1;
-    margin-left: 300px; /* Width of fixed sidebar */
+    margin-left: 300px;
+    /* Width of fixed sidebar */
     padding: 0px 80px;
     background: #ffffff;
     min-height: 80vh;
@@ -297,7 +296,8 @@ a {
 }
 
 /* Tables Styling */
-.income-section, .expenses-section {
+.income-section,
+.expenses-section {
     margin-top: 40px;
     max-width: 900px;
 }
@@ -706,6 +706,156 @@ td:last-child {
         padding: 12px 16px;
         font-size: 0.9rem;
     }
+}
+
+/* ===== Reset Balance Button ===== */
+.reset-balance-btn {
+    margin-top: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    color: #e53935;
+    border: 1.5px solid rgba(229, 57, 53, 0.5);
+    border-radius: 8px;
+    padding: 5px 14px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: 'Jost', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.01em;
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.reset-balance-btn:hover {
+    background: rgba(229, 57, 53, 0.08);
+    border-color: #e53935;
+    color: #c62828;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.15);
+}
+
+.reset-balance-btn:active {
+    transform: translateY(0);
+}
+
+/* ===== Reset Balance Modal ===== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 10, 30, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.modal-overlay.modal-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-box {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px 36px 32px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22);
+    transform: scale(0.92) translateY(12px);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-overlay.modal-visible .modal-box {
+    transform: scale(1) translateY(0);
+}
+
+.modal-icon {
+    font-size: 2.8rem;
+    margin-bottom: 16px;
+    line-height: 1;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 14px;
+}
+
+.modal-desc {
+    font-size: 0.97rem;
+    color: #555;
+    line-height: 1.65;
+    margin: 0 0 28px;
+}
+
+.modal-desc strong {
+    color: #1a1a1a;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.modal-confirm-form {
+    flex: 1;
+    display: flex;
+    max-width: 160px;
+}
+
+.modal-btn {
+    flex: 1;
+    width: 100%;
+    padding: 13px 0;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Jost', sans-serif;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+    max-width: 160px;
+}
+
+.modal-btn-cancel {
+    background: #f1f3f5;
+    color: #444;
+}
+
+.modal-btn-cancel:hover {
+    background: #e2e5ea;
+    color: #1a1a1a;
+    transform: translateY(-1px);
+}
+
+.modal-btn-confirm {
+    background: #e53935;
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(229, 57, 53, 0.3);
+}
+
+.modal-btn-confirm:hover {
+    background: #c62828;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(229, 57, 53, 0.4);
+}
+
+.modal-btn-confirm:active {
+    transform: translateY(0);
 }
 
 /* Small phones: ≤ 480px */
