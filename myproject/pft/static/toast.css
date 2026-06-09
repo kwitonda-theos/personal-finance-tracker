@@ -211,3 +211,52 @@
         max-width: 100%;
     }
 }
+
+/* ===================================================
+   DARK THEME — Toasts
+   =================================================== */
+
+[data-theme="dark"] .toast {
+    background: #1e2235;
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.2),
+        0 10px 30px -5px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .toast-title {
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .toast-message {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .toast-close {
+    color: #64748b;
+}
+
+[data-theme="dark"] .toast-close:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .toast-progress {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .toast-success .toast-icon {
+    background: rgba(16, 185, 129, 0.12);
+}
+
+[data-theme="dark"] .toast-error .toast-icon {
+    background: rgba(239, 68, 68, 0.12);
+}
+
+[data-theme="dark"] .toast-info .toast-icon {
+    background: rgba(59, 130, 246, 0.12);
+}
+
+[data-theme="dark"] .toast-warning .toast-icon {
+    background: rgba(245, 158, 11, 0.12);
+}
