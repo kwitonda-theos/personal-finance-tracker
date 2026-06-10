@@ -90,6 +90,29 @@
                 <div class="table-header">
                     <h3>Expenses</h3>
                     <div class="filter-toolbar">
+                        <div class="sort-dropdown" id="expenses-sort-dropdown">
+                            <button class="sort-btn" type="button" id="expenses-sort-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M11 5h10"></path>
+                                    <path d="M11 9h7"></path>
+                                    <path d="M11 13h4"></path>
+                                    <path d="M3 17l3 3 3-3"></path>
+                                    <path d="M6 18V4"></path>
+                                </svg>
+                                <span id="expenses-sort-label">Sort</span>
+                                <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="sort-menu" id="expenses-sort-menu">
+                                <button class="sort-option active" data-sort="date-desc" data-table="expenses">Date (Newest) <span class="sort-direction-icon">▼</span></button>
+                                <button class="sort-option" data-sort="date-asc" data-table="expenses">Date (Oldest) <span class="sort-direction-icon">▲</span></button>
+                                <button class="sort-option" data-sort="amount-desc" data-table="expenses">Amount (High → Low) <span class="sort-direction-icon">▼</span></button>
+                                <button class="sort-option" data-sort="amount-asc" data-table="expenses">Amount (Low → High) <span class="sort-direction-icon">▲</span></button>
+                                <button class="sort-option" data-sort="desc-asc" data-table="expenses">Description (A → Z) <span class="sort-direction-icon">▲</span></button>
+                                <button class="sort-option" data-sort="desc-desc" data-table="expenses">Description (Z → A) <span class="sort-direction-icon">▼</span></button>
+                            </div>
+                        </div>
                         <div class="filter-dropdown" id="expenses-filter-dropdown">
                             <button class="filter-btn" type="button" id="expenses-filter-btn">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -117,9 +140,9 @@
                 <table class="expenses-table">
                     <thead>
                         <tr>
-                            <th>date</th>
-                            <th>description</th>
-                            <th>amount</th>
+                            <th class="sortable-th sort-active" data-sort-key="date" data-sort-table="expenses">date <span class="th-sort-icon">▼</span></th>
+                            <th class="sortable-th" data-sort-key="desc" data-sort-table="expenses">description <span class="th-sort-icon">⇅</span></th>
+                            <th class="sortable-th" data-sort-key="amount" data-sort-table="expenses">amount <span class="th-sort-icon">⇅</span></th>
                         </tr>
                     </thead>
                     <tbody class="expenses-rows">

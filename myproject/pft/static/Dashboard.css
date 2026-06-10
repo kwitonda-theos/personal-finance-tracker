@@ -506,6 +506,145 @@ td:last-child {
     color: #333;
 }
 
+/* ===== Sort Dropdown ===== */
+.sort-dropdown {
+    position: relative;
+}
+
+.sort-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f1f3f5;
+    border: 1.5px solid #e0e2e6;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: 'Jost', sans-serif;
+    color: #444;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.sort-btn:hover {
+    background: #e9ecef;
+    border-color: #ced4da;
+}
+
+.sort-btn:focus {
+    outline: none;
+    border-color: #3200ff;
+    box-shadow: 0 0 0 3px rgba(50, 0, 255, 0.1);
+}
+
+.sort-btn .chevron {
+    transition: transform 0.25s ease;
+}
+
+.sort-dropdown.open .sort-btn {
+    background: #e9ecef;
+    border-color: #3200ff;
+    color: #3200ff;
+}
+
+.sort-dropdown.open .sort-btn .chevron {
+    transform: rotate(180deg);
+}
+
+.sort-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    padding: 6px;
+    z-index: 100;
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.sort-dropdown.open .sort-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.sort-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 14px;
+    border: none;
+    background: none;
+    text-align: left;
+    font-size: 0.9rem;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    color: #444;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-sizing: border-box;
+}
+
+.sort-option:hover {
+    background: #f1f3f5;
+    color: #1a1a1a;
+}
+
+.sort-option.active {
+    background: rgba(50, 0, 255, 0.08);
+    color: #3200ff;
+    font-weight: 600;
+}
+
+.sort-option .sort-direction-icon {
+    font-size: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    margin-left: 8px;
+}
+
+.sort-option.active .sort-direction-icon {
+    opacity: 1;
+}
+
+/* Clickable sort headers in table */
+th.sortable-th {
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s ease;
+    position: relative;
+    padding-right: 28px;
+}
+
+th.sortable-th:hover {
+    color: #3200ff;
+}
+
+th.sortable-th .th-sort-icon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.7rem;
+    opacity: 0.4;
+    transition: opacity 0.2s ease;
+}
+
+th.sortable-th.sort-active .th-sort-icon {
+    opacity: 1;
+    color: #3200ff;
+}
+
 /* ===== Mobile Responsiveness ===== */
 
 /* Tablet: 769px – 1024px */
@@ -1136,6 +1275,57 @@ td:last-child {
 
 [data-theme="dark"] .filter-clear-btn:hover {
     color: #cbd5e1;
+}
+
+/* Sort Dropdown — Dark */
+[data-theme="dark"] .sort-btn {
+    background: #1a1d2e;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .sort-btn:hover {
+    background: #1e2235;
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+[data-theme="dark"] .sort-btn:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+[data-theme="dark"] .sort-dropdown.open .sort-btn {
+    background: #1e2235;
+    border-color: #7c3aed;
+    color: #a78bfa;
+}
+
+[data-theme="dark"] .sort-menu {
+    background: #1e2235;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .sort-option {
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .sort-option:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .sort-option.active {
+    background: rgba(167, 139, 250, 0.12);
+    color: #a78bfa;
+}
+
+[data-theme="dark"] th.sortable-th:hover {
+    color: #a78bfa;
+}
+
+[data-theme="dark"] th.sortable-th.sort-active .th-sort-icon {
+    color: #a78bfa;
 }
 
 /* Modal */
